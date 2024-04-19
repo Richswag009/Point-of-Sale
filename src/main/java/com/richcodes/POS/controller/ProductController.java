@@ -1,8 +1,12 @@
 package com.richcodes.POS.controller;
 
+import com.richcodes.POS.enitity.Category;
 import com.richcodes.POS.enitity.Product;
+import com.richcodes.POS.enitity.Shop;
 import com.richcodes.POS.exceptions.DuplicateExceptions;
 import com.richcodes.POS.repository.ProductRepository;
+import com.richcodes.POS.service.ShopService.ShopService;
+import com.richcodes.POS.service.categoryService.CategoryService;
 import com.richcodes.POS.service.productService.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,10 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ShopService shopService;
 
 
 
@@ -28,9 +36,13 @@ public class ProductController {
     public String index(Model model){
         Product product = new Product();
         List<Product> products= productService.getAllProduct();
+        List<Category> categories = categoryService.getAllCategory();
+        List<Shop> shops = shopService.getAllShop();
         model.addAttribute("products",products);
         model.addAttribute("product",product);
-        return "dashboard";
+        model.addAttribute("categories",categories);
+        model.addAttribute("shops",shops);
+        return "product";
     }
 
     @PostMapping("/save")
@@ -49,7 +61,7 @@ public class ProductController {
     @GetMapping("/delete")
     public String deleteEmployee(
             @RequestParam("productId")
-            @ModelAttribute("employee")
+            @ModelAttribute("product")
             int theId
     ){
         productService.deleteProduct(theId);

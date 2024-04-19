@@ -11,12 +11,16 @@ public class PosApplication {
 	}
 
 //	@Bean
-//	CommandLineRunner runner(CategoryService categoryService) {
+//	CommandLineRunner runner(ShopService shopService) {
 //		return runner -> {
-//			addnewCategory(categoryService);
+//			addNewShop(shopService);
 //		};
 //	}
 
+//	private void addNewShop(ShopService shopService) {
+//		Shop shop = new Shop("Shop2","Agip Junction Benin","123424224","Open");
+//		shopService.addShop(shop);
+//	}
 
 
 }

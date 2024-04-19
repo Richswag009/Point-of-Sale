@@ -3,8 +3,9 @@ package com.richcodes.POS.enitity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 enum Stocks {
@@ -21,27 +22,29 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     private String description;
     private int qty;
     private Double costPrice;
     private Double sellingPrice;
-    private LocalDateTime manufacturedDate;
-    private LocalDateTime expirationDate;
-    private LocalDateTime dateCreated;
+    private LocalDate manufacturedDate;
+    private LocalDate expirationDate;
+    @CreationTimestamp
+    private LocalDate dateCreated;
     private String barcode;
     @Enumerated
     private Stocks instocks;
     @ManyToOne( cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn() // column in the db
+    @JoinColumn(name = "shops_id") // column in the db
     private Shop shops;
 
     public Product() {
     }
 
-    public Product(String name, String category, String description
-            , int qty, Double costPrice, Double sellingPrice
-            , LocalDateTime manufacturedDate, LocalDateTime expirationDate,
+    public Product(String name, Category category, String description, int qty, Double costPrice,
+                   Double sellingPrice, LocalDate manufacturedDate, LocalDate expirationDate,
                    String barcode, Stocks instocks, Shop shops) {
         this.name = name;
         this.category = category;
@@ -54,7 +57,7 @@ public class Product {
         this.barcode = barcode;
         this.instocks = instocks;
         this.shops = shops;
-        this.dateCreated=LocalDateTime.now();
+        this.dateCreated=LocalDate.now();
     }
 
     @Override
