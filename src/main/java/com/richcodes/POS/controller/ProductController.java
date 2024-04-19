@@ -35,7 +35,7 @@ public class ProductController {
 
     @PostMapping("/save")
     public String showForm(@ModelAttribute Product product, Model model) throws DuplicateExceptions {
-        boolean productExists = productRepository.existsProductByBarCode(product.getBarcode());
+        boolean productExists = productRepository.existsProductByBarcode(product.getBarcode());
         if(!productExists){
             productService.addProduct(product);
         }else{

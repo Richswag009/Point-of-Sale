@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     @Override
     public void addProduct(Product product) {
-        if(productRepository.existsProductByBarCode(product.getBarcode())){
+        if(productRepository.existsProductByBarcode(product.getBarcode())){
             throw  new DuplicateExceptions("Product already exists");
         }
         productRepository.save(product);
