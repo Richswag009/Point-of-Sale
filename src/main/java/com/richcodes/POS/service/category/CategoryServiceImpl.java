@@ -1,4 +1,4 @@
-package com.richcodes.POS.service.categoryService;
+package com.richcodes.POS.service.category;
 
 import com.richcodes.POS.enitity.Category;
 import com.richcodes.POS.exceptions.DuplicateExceptions;
@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCategoryById(int theId) {
+    public Category getCategoryById(Integer theId) {
         Optional<Category> result = categoryRepository.findById(theId);
         Category category = null;
         if (result.isPresent()) {
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(int theId){
+    public void deleteCategory(Integer theId){
         categoryRepository.deleteById(theId);
     }
 

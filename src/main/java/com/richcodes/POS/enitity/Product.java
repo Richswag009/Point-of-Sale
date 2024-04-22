@@ -39,6 +39,9 @@ public class Product {
     @ManyToOne( cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "shops_id") // column in the db
     private Shop shops;
+    @ManyToOne
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 
     public Product() {
     }

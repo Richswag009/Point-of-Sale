@@ -1,4 +1,4 @@
-package com.richcodes.POS.service.ShopService;
+package com.richcodes.POS.service.shop;
 
 import com.richcodes.POS.enitity.Shop;
 import org.springframework.stereotype.Service;

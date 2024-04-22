@@ -1,4 +1,4 @@
-package com.richcodes.POS.service.productService;
+package com.richcodes.POS.service.product;
 
 import com.richcodes.POS.enitity.Product;
 import com.richcodes.POS.exceptions.DuplicateExceptions;

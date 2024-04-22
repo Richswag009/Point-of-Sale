@@ -3,7 +3,7 @@ package com.richcodes.POS.controller;
 import com.richcodes.POS.enitity.Category;
 import com.richcodes.POS.exceptions.DuplicateExceptions;
 import com.richcodes.POS.repository.CategoryRepository;
-import com.richcodes.POS.service.categoryService.CategoryService;
+import com.richcodes.POS.service.category.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +27,11 @@ public class CategoryController {
     @GetMapping()
     public String index(Model model){
         Category category = new Category();
+        model.addAttribute("category",category);
         List<Category> categories= categoryService.getAllCategory();
         model.addAttribute("categories",categories);
-        model.addAttribute("category",category);
-        return "dashboard";
+
+        return "category";
     }
 
     @PostMapping("/save")
@@ -39,8 +40,8 @@ public class CategoryController {
         if(!categoryExists){
             categoryService.addCategory(category);
         }else{
-            model.addAttribute("errorMessage", "Category already taken");
-            return "dashboard";
+            model.addAttribute("errorMessage", "Category already exists");
+            return "product";
         }
         return "redirect:/category";
     }
@@ -49,7 +50,7 @@ public class CategoryController {
     @GetMapping("/delete")
     public String deleteEmployee(
             @RequestParam("categoryId")
-            @ModelAttribute("employee")
+            @ModelAttribute("category")
             int theId
     ){
         categoryService.deleteCategory(theId);
